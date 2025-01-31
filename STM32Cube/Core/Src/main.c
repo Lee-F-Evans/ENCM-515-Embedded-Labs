@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define ITM_Port32(n) (*((volatile unsigned long *)(0xE0000000+4*n)))
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -84,6 +84,25 @@ int test_assembly(int a, int b) {
 	return res;
 }
 
+void BasicLoopTest(void){
+	for(int i; i<2000000;){
+		i++;
+	}
+
+}
+
+void FloatingExperiment(void) {
+	float a = 100.8;
+	float b = 0.4;
+	float c = a * b;
+}
+
+void FixedExperiment(void) {
+	int16_t a = 0.5;
+	int16_t b = 0.125; // should be 0.125;
+	int16_t c = a * b; // leave this as is initially
+}
+
 /* USER CODE END 0 */
 uint8_t loop = 0;
 /**
@@ -122,25 +141,34 @@ int main(void)
   MX_I2S2_Init();
   MX_I2S3_Init();
   MX_SPI1_Init();
-  /* USER CODE BEGIN 2 */
 
+  /* USER CODE BEGIN 2 */
+  HAL_SuspendTick();
+
+  ITM_Port32(31) = 1;
+//  BasicLoopTest();
+  FloatingExperiment();
+  ITM_Port32(31) = 2;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  loop = test_assembly(98, 1);
+//  loop = test_assembly(98, 1);
+//  printf(" Lee Evans\nJan 30th, 2025\n\n");
+//  printf("Why did the Serial Wire Debug (SWD) interface break up with JTAG? \n\nBecause SWD wanted a single, dedicated connection, but JTAG kept bringing too many lines into the relationship!\n");
+
   while (1)
   {
     /* USER CODE END WHILE */
-	  printf("Hello erff\n");
-	  HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-	  HAL_Delay(1000);
-
-	  if(loop<100){
-		  loop++;
-	  }else{
-		  loop = 0;
-	  }
+	  //	  printf("Hello erff\n");
+//	  HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+//	  HAL_Delay(1000);
+//
+//	  if(loop<100){
+//		  loop++;
+//	  }else{
+//		  loop = 0;
+//	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

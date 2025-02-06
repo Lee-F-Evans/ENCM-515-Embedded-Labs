@@ -1,0 +1,19 @@
+!SESSION 2025-02-05 16:00:22.409 -----------------------------------------------
+eclipse.buildId=Version 1.17.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_CA
+Framework arguments:  C:\Users\Lee\Desktop\ENCM-515-Embedded-Labs\STM32Cube\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\Lee\Desktop\ENCM-515-Embedded-Labs\STM32Cube\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-02-05 16:01:51.573
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-02-05 16:01:51.576
+!MESSAGE Log4j2 initialized with config file C:\Users\Lee\Desktop\ENCM-515-Embedded-Labs\STM32Cube\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-02-05 16:01:56.310
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.core.jobs 2 2 2025-02-05 16:02:20.967
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.ui.internal.Workbench$39

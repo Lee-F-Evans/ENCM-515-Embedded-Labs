@@ -90,7 +90,6 @@ void BasicLoopTest(void){
 	for(int i; i<2000000;){
 		i++;
 	}
-
 }
 
 void FloatingExperiment(void) {

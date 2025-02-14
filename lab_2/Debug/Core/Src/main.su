@@ -1,0 +1,14 @@
+../Drivers/CMSIS/Include/core_cm4.h:2064:26:ITM_SendChar	16	static,ignoring_inline_asm
+../Core/Src/main.c:92:6:FloatFilterInit	16	static
+../Core/Src/main.c:101:6:FloatFilterStart	16	static
+../Core/Src/main.c:113:7:FloatFilterGet	152	static
+../Core/Src/main.c:143:5:main	8	static
+../Core/Src/main.c:174:5:_write	32	static
+../Core/Src/main.c:186:6:SystemClock_Config	88	static
+../Core/Src/main.c:231:6:PeriphCommonClock_Config	32	static
+../Core/Src/main.c:252:13:MX_I2C1_Init	8	static
+../Core/Src/main.c:286:13:MX_I2S2_Init	8	static
+../Core/Src/main.c:320:13:MX_I2S3_Init	8	static
+../Core/Src/main.c:354:13:MX_SPI1_Init	8	static
+../Core/Src/main.c:392:13:MX_GPIO_Init	56	static
+../Core/Src/main.c:489:6:Error_Handler	4	static,ignoring_inline_asm

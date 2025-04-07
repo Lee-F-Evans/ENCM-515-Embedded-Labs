@@ -67,8 +67,8 @@ all: main-build
 main-build: lab3_proj.elf secondary-outputs
 
 # Tool invocations
-lab3_proj.elf lab3_proj.map: $(OBJS) $(USER_OBJS) C:\Users\Lee\Desktop\ENCM-515-Embedded-Labs\lab_3\lab\ materials\lab3_proj\lab3_proj\STM32F411VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "lab3_proj.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Lee\Desktop\ENCM-515-Embedded-Labs\lab_3\lab materials\lab3_proj\lab3_proj\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab3_proj.map" -Wl,--gc-sections -static -L"C:\Users\Lee\Desktop\ENCM-515-Embedded-Labs\lab_3\lab materials\lab3_proj\lab3_proj\Drivers\CMSIS\Lib\GCC" -L../Middlewares/ST/STM32_Audio/Addons/PDM/Lib --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+lab3_proj.elf lab3_proj.map: $(OBJS) $(USER_OBJS) C:\Users\LeeFE\Desktop\ENCM-515-Embedded-Labs\lab_3\lab\ materials\lab3_proj\lab3_proj\STM32F411VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "lab3_proj.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\LeeFE\Desktop\ENCM-515-Embedded-Labs\lab_3\lab materials\lab3_proj\lab3_proj\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab3_proj.map" -Wl,--gc-sections -static -L"C:\Users\LeeFE\Desktop\ENCM-515-Embedded-Labs\lab_3\lab materials\lab3_proj\lab3_proj\Drivers\CMSIS\Lib\GCC" -L../Middlewares/ST/STM32_Audio/Addons/PDM/Lib --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

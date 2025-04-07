@@ -32,24 +32,24 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_gyroscope.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/l3gd20/l3gd20.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/gyro.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/i3g4250d/i3g4250d.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_accelerometer.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/lsm303dlhc/lsm303dlhc.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/accelero.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/lsm303agr/lsm303agr.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_audio.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/cs43l22/cs43l22.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/audio.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_gyroscope.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/l3gd20/l3gd20.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/gyro.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/i3g4250d/i3g4250d.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_accelerometer.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/lsm303dlhc/lsm303dlhc.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/accelero.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/lsm303agr/lsm303agr.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_audio.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/cs43l22/cs43l22.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/audio.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h \
  ../Core/Inc/mems.h ../Core/Inc/main.h ../Core/Inc/audio_play.h \
  ../Core/Inc/audio_record.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/CMSIS/DSP/Include/arm_math.h
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/CMSIS/DSP/Include/arm_math.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -84,23 +84,23 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_gyroscope.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/l3gd20/l3gd20.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/gyro.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/i3g4250d/i3g4250d.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_accelerometer.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/lsm303dlhc/lsm303dlhc.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/accelero.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/lsm303agr/lsm303agr.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_audio.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/cs43l22/cs43l22.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/audio.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_gyroscope.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/l3gd20/l3gd20.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/gyro.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/i3g4250d/i3g4250d.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_accelerometer.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/lsm303dlhc/lsm303dlhc.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/accelero.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/lsm303agr/lsm303agr.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery_audio.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Components/cs43l22/cs43l22.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../Common/audio.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h:
 ../Core/Inc/mems.h:
 ../Core/Inc/main.h:
 ../Core/Inc/audio_play.h:
 ../Core/Inc/audio_record.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h:
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/CMSIS/DSP/Include/arm_math.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/CMSIS/DSP/Include/arm_math.h:

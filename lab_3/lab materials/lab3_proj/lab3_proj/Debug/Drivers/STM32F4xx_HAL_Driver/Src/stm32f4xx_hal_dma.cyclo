@@ -1,3 +1,6 @@
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:1150:13:DMA_SetConfig	2
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:1184:17:DMA_CalcBaseAndBitshift	2
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:1212:26:DMA_CheckFifoParam	16
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:171:19:HAL_DMA_Init	8
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:310:19:HAL_DMA_DeInit	3
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:408:19:HAL_DMA_Start	3
@@ -10,6 +13,3 @@
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:1028:19:HAL_DMA_UnRegisterCallback	10
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:1113:22:HAL_DMA_GetState	1
 ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:1124:10:HAL_DMA_GetError	1
-../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:1150:13:DMA_SetConfig	2
-../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:1184:17:DMA_CalcBaseAndBitshift	2
-../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:1212:26:DMA_CheckFifoParam	15

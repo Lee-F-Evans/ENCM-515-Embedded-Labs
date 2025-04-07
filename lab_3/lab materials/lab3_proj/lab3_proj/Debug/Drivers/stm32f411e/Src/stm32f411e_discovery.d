@@ -1,6 +1,6 @@
 Drivers/stm32f411e/Src/stm32f411e_discovery.o: \
  ../Drivers/stm32f411e/Src/stm32f411e_discovery.c \
- C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h \
+ C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -34,7 +34,7 @@ Drivers/stm32f411e/Src/stm32f411e_discovery.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
-C:/Users/Lee/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h:
+C:/Users/LeeFE/Desktop/ENCM-515-Embedded-Labs/lab_3/lab\ materials/lab3_proj/lab3_proj/Drivers/stm32f411e/Inc/stm32f411e_discovery.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:

@@ -25,9 +25,30 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+#define ITM_Port32(n) (*((volatile unsigned long *)(0xE0000000+4*n)))
+
+//Change this value to control frame/block process size
+#define BLOCK_NUM 3
+
+/*Uncomment these for testing or utilizing different filtering methods*/
+#define PROCESS_SAMPLE 1
+//#define PROCESS_BLOCK 1
+//#define UNFOLDED_PROCESS_BLOCK 1
+//#define ASSEMBLY_PROCESS_BLOCK 1
+
 #define NUMBER_OF_TAPS	256
 #define BUFFER_SIZE 32
-#define FUNCTIONAL_TEST 1 // uncomment this flag if we want to test the code without the interrupt
+#define FUNCTIONAL_TEST 1 	// uncomment this flag if we want to test the code without the interrupt
+#define OUTPUT_SAMPLES 500 	// number of samples in the output buffer
+#define INPUT_SAMPLES 44100
+
+uint16_t blockIndex = 0; //for iterating through the required amount of samples. 3 or 16
+
+#ifndef PROCESS_SAMPLE
+int16_t inputBuffer[BLOCK_NUM];
+int16_t outputBuffer[OUTPUT_SAMPLES];
+static int outputSampleCounter = 0;
+#endif
 
 __IO uint8_t UserPressButton = 0;
 
@@ -52,14 +73,14 @@ volatile int underflow_count = 0;
 int16_t filter_coeffs[NUMBER_OF_TAPS] = {-3, -8, -8, -12, -13, -13, -12, -9, -4, 1, 6, 10, 11, 9, 5, 0, -6, -11, -13, -13, -9, -2, 6, 13, 17, 17, 13, 5, -5, -14, -21, -23, -19, -10, 2, 15, 25, 30, 27, 17, 2, -15, -29, -37, -36, -26, -8, 13, 33, 45, 47, 37, 17, -9, -35, -53, -59, -50, -28, 3, 36, 61, 73, 66, 43, 6, -34, -69, -88, -86, -61, -20, 30, 75, 104, 108, 85, 38, -22, -80, -122, -135, -114, -63, 9, 83, 142, 167, 152, 96, 11, -83, -163, -207, -200, -142, -41, 78, 187, 257, 266, 206, 87, -66, -217, -327, -362, -306, -163, 41, 259, 436, 522, 481, 303, 14, -331, -654, -866, -886, -661, -174, 543, 1416, 2336, 3176, 3818, 4164, 4164, 3818, 3176, 2336, 1416, 543, -174, -661, -886, -866, -654, -331, 14, 303, 481, 522, 436, 259, 41, -163, -306, -362, -327, -217, -66, 87, 206, 266, 257, 187, 78, -41, -142, -200, -207, -163, -83, 11, 96, 152, 167, 142, 83, 9, -63, -114, -135, -122, -80, -22, 38, 85, 108, 104, 75, 30, -20, -61, -86, -88, -69, -34, 6, 43, 66, 73, 61, 36, 3, -28, -50, -59, -53, -35, -9, 17, 37, 47, 45, 33, 13, -8, -26, -36, -37, -29, -15, 2, 17, 27, 30, 25, 15, 2, -10, -19, -23, -21, -14, -5, 5, 13, 17, 17, 13, 6, -2, -9, -13, -13, -11, -6, 0, 5, 9, 11, 10, 6, 1, -4, -9, -12, -13, -13, -12, -8, -8, -3};
 
 volatile int new_sample_flag = 0;
-static int sample_count = 0;
+static int32_t sample_count = 0;
 int16_t newSampleL = 0;
 int16_t newSampleR = 0;
 int16_t filteredSampleL;
 int16_t filteredSampleR;
 
 static volatile int32_t filteredOutBufferA[BUFFER_SIZE];
-static volatile int32_t filteredOutBufferB[BUFFER_SIZE];
+//static volatile int32_t filteredOutBufferB[BUFFER_SIZE];
 static volatile int bufchoice = 0;
 
 extern I2S_HandleTypeDef       hAudioOutI2s;
@@ -68,6 +89,10 @@ extern I2S_HandleTypeDef       hAudioOutI2s;
 static void SystemClock_Config(void);
 static void GPIOA_Init(void);
 static int16_t ProcessSample(int16_t newsample, int16_t* history);
+
+void ProcessBlock(int16_t* sampleBlock, int16_t* history);
+void UnfoldedProcessBlock(int16_t* sampleBlock, int16_t* history);
+void AssemblyProcessBlock(int16_t* sampleBlock, int16_t* history);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -124,8 +149,6 @@ int main(void)
 	  /* Starting Error */
 	  Error_Handler();
   }
-
-
   /******************************************************************************
    ******************************************************************************
    ******************************************************************************
@@ -136,46 +159,31 @@ int main(void)
    ******************************************************************************
    */
 
-
-
-  static int i = 0;
-  static int k = 0;
-  static int start = 0;
+  static uint16_t i = 0;
+  static uint16_t k = 0;
+  static uint16_t start = 0;
 
   while (1) {
 
-
-#ifdef FUNCTIONAL_TEST
-		if (sample_count < 64000) {
-			  newSampleL = (int16_t)raw_audio[sample_count];
-			  newSampleR = (int16_t)(raw_audio[sample_count] >> 16);
-			  sample_count++;
-		  } else {
-			  sample_count = 0;
-		  }
-#endif
+//#ifdef FUNCTIONAL_TEST
+//		if (sample_count < 64000) {
+//			  newSampleL = (int16_t)raw_audio[sample_count];
+//			  newSampleR = (int16_t)(raw_audio[sample_count] >> 16);
+//			  sample_count++;
+//		  } else {
+//			  sample_count = 0;
+//		  }
+//#endif
 
 #ifndef FUNCTIONAL_TEST
 	if (new_sample_flag == 1) {
 #endif
 
-		//circular buffer FIR
+	/* circular buffer FIR */
+	#ifdef PROCESS_SAMPLE
+		ITM_Port32(31) = 1;
 		filteredSampleL = ProcessSample(newSampleL,history_l);
-
-		//frame of 3 FIR processing
-		filteredSampleL = ProcessBlock(newSampleL,history_l);
-
-		//frame of 16 FIR processing
-		filteredSampleL = ProcessBlock2(newSampleL,history_l);
-
-		//frame of 3 FIR processing unfolded
-		filteredSampleL = UnfoldProcessBlock(newSampleL,history_l);
-
-		//frame of 16 FIR processing unfolded
-		filteredSampleL = UnfoldProcessBlock2(newSampleL,history_l);
-
-		//frame of 16 FIR processing unfolded with special instructions
-		filteredSampleL = AssemblyProcessBlock2(newSampleL,history_l);
+		ITM_Port32(31) = 2;
 
 		new_sample_flag = 0;
 		if (i < NUMBER_OF_TAPS-1) {
@@ -185,11 +193,63 @@ int main(void)
 			if (bufchoice == 0) {
 				filteredOutBufferA[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL; // copy the filtered output to both channels
 			} else {
-				filteredOutBufferB[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL;
+//				filteredOutBufferB[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL;
 			}
 
 			k++;
 		}
+	#endif
+
+	/* basic block process */
+	#ifdef PROCESS_BLOCK
+		//Gather the required samples for block processing. 3 or 16
+		for(int j = 0; j<BLOCK_NUM; j++){
+			inputBuffer[j] = (int16_t)raw_audio[sample_count]; // Type casting to int16 gets only left channel data
+			if(sample_count<INPUT_SAMPLES){
+				sample_count++;
+			} else {
+				sample_count = 0;
+			}
+		}
+
+		ITM_Port32(31) = 1;
+		ProcessBlock(inputBuffer,history_l);
+		ITM_Port32(31) = 2;
+	#endif
+
+	/* block process with unfold */
+	#ifdef UNFOLDED_PROCESS_BLOCK
+		//Gather the required samples for block processing. 3 or 16
+		for(int j = 0; j<BLOCK_NUM; j++){
+			inputBuffer[j] = (int16_t)raw_audio[sample_count]; // Type casting to int16 gets only left channel data
+			if(sample_count<INPUT_SAMPLES){
+				sample_count++;
+			} else {
+				sample_count = 0;
+			}
+		}
+
+		ITM_Port32(31) = 1;
+		UnfoldedProcessBlock(inputBuffer,history_l);
+		ITM_Port32(31) = 2;
+		#endif
+
+	/* block processing unfolded with special instructions */
+	#ifdef ASSEMBLY_PROCESS_BLOCK
+		//Gather the required samples for block processing. 3 or 16
+		for(int j = 0; j<BLOCK_NUM; j++){
+			inputBuffer[j] = (int16_t)raw_audio[sample_count]; // Type casting to int16 gets only left channel data
+			if(sample_count<INPUT_SAMPLES){
+				sample_count++;
+			} else {
+				sample_count = 0;
+			}
+		}
+
+		ITM_Port32(31) = 1;
+		AssemblyProcessBlock(inputBuffer,history_l);
+		ITM_Port32(31) = 2;
+	#endif
 
 #ifndef FUNCTIONAL_TEST
 	}
@@ -199,7 +259,7 @@ int main(void)
 	// this is probably not going to be used in Lab2
 	if (k == BUFFER_SIZE) {
 		k = 0;
-		bufchoice = bufchoice == 0 ? 1 : 0;
+//		bufchoice = bufchoice == 0 ? 1 : 0;
 	}
 
 //    if(UserPressButton == 1) {
@@ -364,10 +424,9 @@ static void GPIOA_Init(void){
 
 }
 
-
-int16_t history[256];
+#ifdef PROCESS_SAMPLE
 uint16_t processIndex = 0;
-static int16_t ProcessSample(int16_t newsample) {
+static int16_t ProcessSample(int16_t newsample, int16_t* history) {
 	//create value to store filtered sample
 	int32_t accumulator = 0;
 
@@ -375,7 +434,7 @@ static int16_t ProcessSample(int16_t newsample) {
 	history[processIndex] = newsample;
 
 	//Perform FIR convolution
-	for(int16_t tap = 0; i<BUFFER_SIZE; tap++){
+	for(int16_t tap = 0; tap<NUMBER_OF_TAPS; tap++){
 		accumulator += history[(processIndex + tap) % BUFFER_SIZE] * filter_coeffs[tap];
 	}
 
@@ -391,28 +450,127 @@ static int16_t ProcessSample(int16_t newsample) {
 
 	return (int16_t)(accumulator>>15);
 }
+#endif
 
-uint16_t blockIndex = 0;
+#ifdef PROCESS_BLOCK
 //processes data in blocks of 3
-void ProcessBlock(int16_t* smallBlock){
+void ProcessBlock(int16_t* sampleBlock, int16_t* history){
+
 	//itterate through new frame samples
-	for(int blockNum = 0; block < 3; blockNum++){
+	for(int blockNum = 0; blockNum < BLOCK_NUM; blockNum++){
+
+		int32_t accumulator = 0;
 		// replace oldest value in history with new frame value
-		history[blockIndex] = smallBlock[blockNum];
+		history[blockIndex] = sampleBlock[blockNum];
 
 		//Perform FIR convolution
-		for(int16_t tap = 0; i<BUFFER_SIZE; tap++){
-			accumulator += history[(blockIndex + tap) % BUFFER_SIZE] * filter_coeffs[tap];
+		for(int16_t tap = 0; tap<NUMBER_OF_TAPS; tap++){
+			accumulator += (int32_t)history[(blockIndex + tap) % NUMBER_OF_TAPS] * (int32_t)filter_coeffs[tap];
+		}
+
+		//advance the circular buffer 1 position forward
+		blockIndex = (blockIndex + 1) % NUMBER_OF_TAPS;
+
+		//Check and correct if we have overflow, value is for the max and min value of a 16bit signed int.
+		if(accumulator > 0x3FFFFFFF){
+			accumulator = 0x3FFFFFFF;
+		} else if (accumulator < -0x40000000){
+			accumulator = -0x40000000;
+		}
+
+		//add the new sample to the output buffer and update sample counter if out buffer is full
+		outputBuffer[outputSampleCounter] = (int16_t) (accumulator >> 15);
+		outputSampleCounter++;
+		if(outputSampleCounter == OUTPUT_SAMPLES){
+			outputSampleCounter = 0;
 		}
 	}
 }
+#endif
 
-//processes data in blocks of 16
-void ProcessBlock2(int16_t* bigBlock){
+#ifdef UNFOLDED_PROCESS_BLOCK
+void UnfoldedProcessBlock(int16_t* sampleBlock, int16_t* history){
+
+	//itterate through new frame samples
+	for(int blockNum = 0; blockNum < BLOCK_NUM; blockNum++){
+
+		int32_t accumulator = 0;
+		// replace oldest value in history with new frame value
+		history[blockIndex] = sampleBlock[blockNum];
+
+		//Perform FIR convolution with 4 operations unfolded
+		for(int16_t tap = 0; tap<NUMBER_OF_TAPS; tap +=2){
+			accumulator += (int32_t)history[(blockIndex + tap) % NUMBER_OF_TAPS] * (int32_t)filter_coeffs[tap];
+			accumulator += (int32_t)history[(blockIndex + tap + 1) % NUMBER_OF_TAPS] * (int32_t)filter_coeffs[tap + 1];
+		}
+
+		//advance the circular buffer 1 position forward
+		blockIndex = (blockIndex + 1) % NUMBER_OF_TAPS;
+
+		//Check and correct if we have overflow, value is for the max and min value of a 16bit signed int.
+		if(accumulator > 0x3FFFFFFF){
+			accumulator = 0x3FFFFFFF;
+		} else if (accumulator < -0x40000000){
+			accumulator = -0x40000000;
+		}
+
+		//add the new sample to the output buffer and update sample counter if out buffer is full
+		outputBuffer[outputSampleCounter] = (int16_t) (accumulator >> 15);
+		if(outputSampleCounter == (OUTPUT_SAMPLES - 1)){
+			outputSampleCounter = 0;
+		} else {
+			outputSampleCounter++;
+		}
+	}
+}
+#endif
+
+#ifdef ASSEMBLY_PROCESS_BLOCK
+void AssemblyProcessBlock(int16_t* sampleBlock, int16_t* history){
+	//itterate through new frame samples
+	for(int blockNum = 0; blockNum < BLOCK_NUM; blockNum++){
+
+		int32_t accumulator = 0;
+		// replace oldest value in history with new frame value
+		history[blockIndex] = sampleBlock[blockNum];
+
+		//Perform FIR convolution with 4 operations unfolded
+		for(int16_t tap = 0; tap<NUMBER_OF_TAPS; tap +=2){
+
+			//Multiple and accumulate accelerator SMLABB instruction
+			__asm volatile ("SMLABB %[result], %[op1], %[op2], %[acc]"
+			: [result] "=r" (accumulator)
+			: [op1] "r" (history[(blockIndex + tap) % NUMBER_OF_TAPS]), [op2] "r" (filter_coeffs[tap]), [acc] "r" (accumulator)
+			);
+
+			__asm volatile ("SMLABB %[result], %[op1], %[op2], %[acc]"
+			: [result] "=r" (accumulator)
+			: [op1] "r" (history[(blockIndex + tap + 1) % NUMBER_OF_TAPS]), [op2] "r" (filter_coeffs[tap + 1]), [acc] "r" (accumulator)
+			);
+		}
+
+		//advance the circular buffer 1 position forward
+		blockIndex = (blockIndex + 1) % NUMBER_OF_TAPS;
+
+		//Check and correct if we have overflow, value is for the max and min value of a 16bit signed int.
+		if(accumulator > 0x3FFFFFFF){
+			accumulator = 0x3FFFFFFF;
+		} else if (accumulator < -0x40000000){
+			accumulator = -0x40000000;
+		}
+
+		//add the new sample to the output buffer and update sample counter if out buffer is full
+		outputBuffer[outputSampleCounter] = (int16_t) (accumulator >> 15);
+		if(outputSampleCounter == (OUTPUT_SAMPLES - 1)){
+			outputSampleCounter = 0;
+		} else {
+			outputSampleCounter++;
+		}
+	}
 
 }
 
-
+#endif
 
 #ifdef USE_FULL_ASSERT
 

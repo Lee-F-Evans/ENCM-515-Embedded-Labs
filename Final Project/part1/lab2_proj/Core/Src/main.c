@@ -31,10 +31,10 @@
 #define BLOCK_NUM 3
 
 /*Uncomment these for testing or utilizing different filtering methods*/
-#define PROCESS_SAMPLE 1
+//#define PROCESS_SAMPLE 1
 //#define PROCESS_BLOCK 1
 //#define UNFOLDED_PROCESS_BLOCK 1
-//#define ASSEMBLY_PROCESS_BLOCK 1
+#define ASSEMBLY_PROCESS_BLOCK 1
 
 #define NUMBER_OF_TAPS	256
 #define BUFFER_SIZE 32
@@ -567,7 +567,6 @@ void AssemblyProcessBlock(int16_t* sampleBlock, int16_t* history){
 			outputSampleCounter++;
 		}
 	}
-
 }
 
 #endif

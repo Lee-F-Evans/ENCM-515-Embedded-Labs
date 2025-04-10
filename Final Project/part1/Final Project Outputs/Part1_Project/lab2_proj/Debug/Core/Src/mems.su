@@ -1,0 +1,2 @@
+../Core/Src/mems.c:52:6:ACCELERO_MEMS_Test	32	static
+../Core/Src/mems.c:136:6:GYRO_MEMS_Test	32	static
